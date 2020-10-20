@@ -1,5 +1,12 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+    Collection,
+    Entity,
+    OneToMany,
+    PrimaryKey,
+    Property,
+} from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
+import { Product } from "./Product";
 
 @ObjectType()
 @Entity()
@@ -18,6 +25,9 @@ export class ProductType {
 
     @Property({ type: "text" })
     description!: string;
+
+    @OneToMany({ entity: () => Product, mappedBy: "type" })
+    products = new Collection<Product>(this);
 
     constructor(name: string, description: string) {
         this.name = name;
