@@ -1,5 +1,12 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+    Collection,
+    Entity,
+    OneToMany,
+    PrimaryKey,
+    Property,
+} from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
+import { Movie } from "./Movie";
 
 @ObjectType()
 @Entity()
@@ -24,6 +31,9 @@ export class Billboard {
 
     @Property()
     capacity!: number;
+
+    @OneToMany({ entity: () => Movie, mappedBy: "billboard" })
+    movies = new Collection<Movie>(this);
 
     constructor(
         dateNow: Date,

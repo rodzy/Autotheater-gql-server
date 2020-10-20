@@ -2,11 +2,16 @@ import {
     Collection,
     Entity,
     ManyToMany,
+    ManyToOne,
+    OneToMany,
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
 import { Genre } from "./Genre";
+import { MovieClassification } from "./MovieClassification";
+import { Billboard } from "./Billboard";
+import { MovieRating } from "./MovieRating";
 
 @ObjectType()
 @Entity()
@@ -37,6 +42,15 @@ export class Movie {
 
     @ManyToMany({ entity: () => Genre, inversedBy: "movies" })
     genres = new Collection<Genre>(this);
+
+    @ManyToOne()
+    classification!: MovieClassification;
+
+    @ManyToOne()
+    billboard!: Billboard;
+
+    @OneToMany({ entity: () => MovieRating, mappedBy: "movie" })
+    ratings = new Collection<MovieRating>(this);
 
     constructor(
         name: string,
