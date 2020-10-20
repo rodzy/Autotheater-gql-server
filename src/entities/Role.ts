@@ -5,24 +5,29 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Int, Field } from "type-graphql";
 import { User } from "./User";
 
 @ObjectType()
 @Entity()
 export class Role {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "date" })
     createdAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "text" })
     name!: string;
 
+    @Field()
     @Property({ type: "text", nullable: true })
     description?: string;
 

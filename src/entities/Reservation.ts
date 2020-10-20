@@ -6,7 +6,7 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Field, Int, Float } from "type-graphql";
 import { Ticket } from "./Ticket";
 import { Product } from "./Product";
 import { User } from "./User";
@@ -14,24 +14,31 @@ import { User } from "./User";
 @ObjectType()
 @Entity()
 export class Reservation {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "date" })
     createdAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date" })
     date_now = new Date();
 
+    @Field(() => Int)
     @Property()
     tax!: number;
 
+    @Field(() => Float)
     @Property()
     total!: number;
 
+    @Field()
     @Property({ default: true })
     status!: boolean;
 

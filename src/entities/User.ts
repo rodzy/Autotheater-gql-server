@@ -5,28 +5,33 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Int, Field } from 'type-graphql';
 import { Reservation } from "./Reservation";
 import { Role } from "./Role";
 
 ObjectType();
 @Entity()
 export class User {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "text" })
     username!: string;
 
+    @Field(() => String)
     @Property({ type: "text", nullable: true })
     lastName?: string;
 
+    @Field(() => String)
     @Property({ type: "text", unique: true })
     email!: string;
 
     @Property({ type: "text" })
     password!: string;
 
+    @Field()
     @Property({ type: "boolean", default: true })
     status!: boolean;
 

@@ -1,22 +1,27 @@
 import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Int, Field } from 'type-graphql';
 import { Billboard } from "./Billboard";
 
 @ObjectType()
 @Entity()
 export class Location {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "date" })
     createdAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
+    @Field(() => String)
     @Property()
     location!: string;
 
+    @Field(() => String)
     @Property()
     description!: string;
 

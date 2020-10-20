@@ -6,7 +6,7 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Field, Int } from "type-graphql";
 import { Movie } from "./Movie";
 import { Ticket } from "./Ticket";
 import { Location } from "./Location";
@@ -14,24 +14,31 @@ import { Location } from "./Location";
 @ObjectType()
 @Entity()
 export class Billboard {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "date" })
     createdAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date" })
     date_now = new Date();
 
+    @Field(() => String)
     @Property({ type: "date" })
     show_date!: string;
 
+    @Field()
     @Property({ type: "boolean", default: true })
     status!: boolean;
 
+    @Field(() => Int)
     @Property()
     capacity!: number;
 

@@ -5,31 +5,38 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType } from "type-graphql";
+import { ObjectType, Int, Field, Float } from "type-graphql";
 import { Billboard } from "./Billboard";
 import { Reservation } from "./Reservation";
 
 @ObjectType()
 @Entity()
 export class Ticket {
+    @Field(() => Int)
     @PrimaryKey()
     id!: number;
 
+    @Field(() => String)
     @Property({ type: "date" })
     createdAt = new Date();
 
+    @Field(() => String)
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
+    @Field(() => String)
     @Property()
     name!: string;
 
+    @Field(() => String)
     @Property()
     description!: string;
 
+    @Field(() => Float)
     @Property()
     pricing!: number;
 
+    @Field()
     @Property({ default: true })
     status!: boolean;
 
