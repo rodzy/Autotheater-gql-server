@@ -1,5 +1,15 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+    Collection,
+    Entity,
+    ManyToMany,
+    ManyToOne,
+    PrimaryKey,
+    Property,
+} from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
+import { Ticket } from "./Ticket";
+import { Product } from "./Product";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
@@ -24,6 +34,15 @@ export class Reservation {
 
     @Property({ default: true })
     status!: boolean;
+
+    @ManyToMany({ entity: () => Ticket, mappedBy: "reservations" })
+    tickets = new Collection<Ticket>(this);
+
+    @ManyToMany({ entity: () => Product, mappedBy: "reservations" })
+    products = new Collection<Product>(this);
+
+    @ManyToOne()
+    user!: User;
 
     constructor(tax: number, total: number, status: boolean) {
         this.tax = tax;
