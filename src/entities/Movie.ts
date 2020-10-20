@@ -1,5 +1,12 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+    Collection,
+    Entity,
+    ManyToMany,
+    PrimaryKey,
+    Property,
+} from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
+import { Genre } from "./Genre";
 
 @ObjectType()
 @Entity()
@@ -27,6 +34,9 @@ export class Movie {
 
     @Property({ type: "boolean", default: true })
     status!: boolean;
+
+    @ManyToMany({ entity: () => Genre, inversedBy: "movies" })
+    genres = new Collection<Genre>(this);
 
     constructor(
         name: string,
