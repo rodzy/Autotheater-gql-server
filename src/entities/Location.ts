@@ -1,5 +1,6 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
 import { ObjectType } from "type-graphql";
+import { Billboard } from "./Billboard";
 
 @ObjectType()
 @Entity()
@@ -18,6 +19,9 @@ export class Location {
 
     @Property()
     description!: string;
+
+    @ManyToOne()
+    billboard!: Billboard;
 
     constructor(location: string, description: string) {
         this.location = location;
