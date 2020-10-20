@@ -2,6 +2,8 @@
 
 Auto theater server the GraphQL + Node.js version of the REST API build with Laravel 7.x and specifically done for an auto cinema application.
 
+[The REST version](https://github.com/rodzy/Autotheater-server)
+
 <!-- ## Set up
 ### Prerequisites
 
