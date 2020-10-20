@@ -44,7 +44,7 @@ export class Product {
     @Property({ type: "boolean", default: true })
     status!: boolean;
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => ProductType })
     type!: ProductType;
 
     @ManyToMany({ entity: () => Reservation, inversedBy: "products" })

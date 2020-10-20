@@ -1,5 +1,5 @@
 import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
-import { ObjectType, Int, Field } from 'type-graphql';
+import { ObjectType, Int, Field } from "type-graphql";
 import { Billboard } from "./Billboard";
 
 @ObjectType()
@@ -25,7 +25,7 @@ export class Location {
     @Property()
     description!: string;
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => Billboard })
     billboard!: Billboard;
 
     constructor(location: string, description: string) {

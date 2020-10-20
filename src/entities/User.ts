@@ -5,7 +5,7 @@ import {
     PrimaryKey,
     Property,
 } from "@mikro-orm/core";
-import { ObjectType, Int, Field } from 'type-graphql';
+import { ObjectType, Int, Field } from "type-graphql";
 import { Reservation } from "./Reservation";
 import { Role } from "./Role";
 
@@ -38,7 +38,7 @@ export class User {
     @OneToMany({ entity: () => Reservation, mappedBy: "user" })
     reservations!: Reservation;
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => Role })
     role!: Role;
 
     constructor(

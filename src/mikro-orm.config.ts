@@ -1,6 +1,7 @@
 import { MikroORM } from "@mikro-orm/core";
 require("dotenv").config();
 import path from "path";
+import entities from "./entities";
 import { __prod__ } from "./utils/constants.util";
 
 
@@ -9,7 +10,7 @@ export default {
         path: path.join(__dirname, "./migrations"),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    entities: [],
+    entities: [...entities],
     dbName: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     type: "postgresql",

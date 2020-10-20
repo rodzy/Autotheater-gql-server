@@ -1,5 +1,5 @@
 import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
-import { ObjectType, Int, Field } from 'type-graphql';
+import { ObjectType, Int, Field } from "type-graphql";
 import { Product } from "./Product";
 
 @ObjectType()
@@ -15,6 +15,6 @@ export class ProductRating {
     @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => Product })
     product!: Product;
 }

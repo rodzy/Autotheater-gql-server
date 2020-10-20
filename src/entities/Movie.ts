@@ -51,10 +51,10 @@ export class Movie {
     @ManyToMany({ entity: () => Genre, inversedBy: "movies" })
     genres = new Collection<Genre>(this);
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => MovieClassification })
     classification!: MovieClassification;
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => Billboard })
     billboard!: Billboard;
 
     @OneToMany({ entity: () => MovieRating, mappedBy: "movie" })

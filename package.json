@@ -6,11 +6,12 @@
   "author": "rodzy <irod2899@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "watch":"tsc -w",
-    "dev":"nodemon dist/index.js",
-    "dev:ts":"nodemon --exec src/index.ts",
-    "start":"node dist/index.js",
-    "start:ts":"ts-node src/index.ts"
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js",
+    "dev:ts": "nodemon --exec src/index.ts",
+    "start": "node dist/index.js",
+    "start:ts": "ts-node src/index.ts",
+    "db:migrate": "mikro-orm migration:create"
   },
   "devDependencies": {
     "@types/node": "^14.11.10",
@@ -24,6 +25,7 @@
     "@mikro-orm/migrations": "^4.2.0",
     "@mikro-orm/postgresql": "^4.2.0",
     "apollo-server-express": "^2.18.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "pg": "^8.4.1",

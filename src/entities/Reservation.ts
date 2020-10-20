@@ -48,7 +48,7 @@ export class Reservation {
     @ManyToMany({ entity: () => Product, mappedBy: "reservations" })
     products = new Collection<Product>(this);
 
-    @ManyToOne()
+    @ManyToOne({ entity: () => User })
     user!: User;
 
     constructor(tax: number, total: number, status: boolean) {
