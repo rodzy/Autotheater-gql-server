@@ -1,10 +1,11 @@
-# Auto Theater server 🎪
+# Auto Theater server
 
 Auto theater server the GraphQL + Node.js version of the REST API build with Laravel 7.x and specifically done for an auto cinema application.
 
 [The REST version](https://github.com/rodzy/Autotheater-server)
 
 ## Set up
+
 ### Prerequisites
 
 1. Node
@@ -17,16 +18,18 @@ Auto theater server the GraphQL + Node.js version of the REST API build with Lar
 2. `clone` your `fork` into your local machine.
 3. `cd autotheater-gql-server` on your terminal.
 4. Run `yarn install` on your terminal to get all the dependencies used.
-5. Setup your database environment keep in mind that this server was made using PostgreSQL in mind <br> Create a `.env` file as the following
-   ```
+5. Setup your database environment keep in mind that this server was made using PostgreSQL in mind.
+6. Create a `.env` file as the following
+
+   ```s
    DB_CONNECTION=pgsql
    DB_HOST=127.0.0.1
    DB_PORT=5432
-   DB_NAME=autotheatergql
-   DB_USERNAME= <your-username>
-   DB_PASSWORD= <password>
+   DB_NAME="autotheatergql"
+   DB_USERNAME= "<your-username>"
+   DB_PASSWORD= "<password>"
    ```
-6. Run `yarn db:migrate` to run the migrations and generate the database model.
+
 7. Run `yarn watch` to compile all the `*.ts` files into `*.js`.
 8. Run `yarn dev`, and you're ready to go server must be online on `http://localhost:4000/graphql`.
 
@@ -42,12 +45,12 @@ The npm scripts:
     "dev":"nodemon dist/index.js",
     "dev:ts":"nodemon --exec src/index.ts",
     "start":"node dist/index.js",
-    "start:ts":"ts-node src/index.ts"
+    "start:ts":"ts-node src/index.ts",
+    "db:migrate":"mikro-orm migration:create"
   },
 ```
 
-> Keep in mind that using dev:ts will be slower because of the re-compiling step 
-
+> Keep in mind that using dev:ts will be slower because of the re-compiling step
 
 ## Data model
 
@@ -72,7 +75,6 @@ The current data model is composed by:
 <em>Diagram to understand the basic flow of the aplication, <strong>some tables are not in the current data structure </strong></em>
 <strong>Misc:</strong>
 <p align="center">🔵 Primary Keys 🟠 Foreign keys 🟢 Dynamic API types for the frontend ⚪ Basic fields.</p>
-
 
 ## License
 
