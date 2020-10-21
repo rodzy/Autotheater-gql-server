@@ -6,6 +6,7 @@ import ProductClassificationPopulate from "./seeds/ProductClassification.populat
 import MovieClassificationPopulate from "./seeds/MovieClassification.populate";
 import ProductTypePopulate from "./seeds/ProductType.populate";
 import RolePopulate from "./seeds/Role.populate";
+import TicketPopulate from "./seeds/Ticket.populate";
 
 const seed = async () => {
     const orm = await MikroORM.init(mikroOrmConfig);
@@ -16,5 +17,6 @@ const seed = async () => {
     await MovieClassificationPopulate(orm);
     await ProductClassificationPopulate(orm);
     await ProductTypePopulate(orm);
+    await TicketPopulate(orm);
 };
 seed();
