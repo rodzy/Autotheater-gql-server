@@ -24,7 +24,7 @@ export class ProductType {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     name!: string;
 
     @Field(() => String)

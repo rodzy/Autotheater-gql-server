@@ -24,12 +24,12 @@ export class Genre {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     name!: string;
 
     @Field()
-    @Property({ nullable: true })
-    description: string;
+    @Property({ type: "text", nullable: true })
+    description?: string;
 
     @ManyToMany({ entity: () => Movie, mappedBy: "genres" })
     movies = new Collection<Movie>(this);

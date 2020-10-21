@@ -29,15 +29,15 @@ export class Product {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     name!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     description!: string;
 
     @Field(() => Float)
-    @Property()
+    @Property({ type: "double" })
     price!: number;
 
     @Field()

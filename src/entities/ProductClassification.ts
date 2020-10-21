@@ -24,15 +24,15 @@ export class ProductClassification {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     type!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     description!: string;
 
     @Field(() => Float)
-    @Property()
+    @Property({ type: "double" })
     addedPrice!: number;
 
     @ManyToMany({ entity: () => Product, mappedBy: "classifications" })

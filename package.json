@@ -7,9 +7,9 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon dist/index.js",
+    "dev": "nodemon dist/src/index.js",
     "dev:ts": "nodemon --exec src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "start:ts": "ts-node src/index.ts",
     "db:migrate": "mikro-orm migration:create",
     "db:populate": "ts-node src/seed.ts"

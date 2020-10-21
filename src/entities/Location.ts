@@ -24,11 +24,11 @@ export class Location {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     location!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     description!: string;
 
     @OneToMany({ entity: () => Billboard, mappedBy: "location" })

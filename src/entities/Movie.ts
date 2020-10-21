@@ -29,7 +29,7 @@ export class Movie {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     name!: string;
 
     @Field(() => String)
@@ -37,11 +37,11 @@ export class Movie {
     synopsis!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     image_url!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     banner_url!: string;
 
     @Field()

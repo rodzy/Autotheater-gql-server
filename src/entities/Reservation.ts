@@ -31,11 +31,11 @@ export class Reservation {
     date_now = new Date();
 
     @Field(() => Int)
-    @Property()
+    @Property({ type: "int" })
     tax!: number;
 
     @Field(() => Float)
-    @Property()
+    @Property({ type: "double" })
     total!: number;
 
     @Field()

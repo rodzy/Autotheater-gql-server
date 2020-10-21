@@ -13,10 +13,10 @@ const seed = async () => {
 
     await RolePopulate(orm);
     await LocationPopulate(orm);
-    await GenrePopulate(orm);
-    await MovieClassificationPopulate(orm);
-    await ProductClassificationPopulate(orm);
     await ProductTypePopulate(orm);
     await TicketPopulate(orm);
+    await ProductClassificationPopulate(orm);
+    await MovieClassificationPopulate(orm);
+    await GenrePopulate(orm);
 };
 seed();

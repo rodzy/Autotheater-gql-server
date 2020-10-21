@@ -24,11 +24,11 @@ export class MovieClassification {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     type!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     description!: string;
 
     @OneToMany({ entity: () => Movie, mappedBy: "classification" })

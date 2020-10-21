@@ -25,19 +25,19 @@ export class Ticket {
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     name!: string;
 
     @Field(() => String)
-    @Property()
+    @Property({ type: "text" })
     description!: string;
 
     @Field(() => Float)
-    @Property()
+    @Property({ type: "double" })
     pricing!: number;
 
     @Field()
-    @Property({ default: true })
+    @Property({ type:"boolean", default: true })
     status!: boolean;
 
     @ManyToMany({ entity: () => Billboard, inversedBy: "tickets" })
