@@ -46,7 +46,8 @@ The npm scripts:
     "dev:ts":"nodemon --exec src/index.ts",
     "start":"node dist/index.js",
     "start:ts":"ts-node src/index.ts",
-    "db:migrate":"mikro-orm migration:create"
+    "db:migrate":"mikro-orm migration:create",
+    "db:populate": "ts-node src/seed.ts"
   },
 ```
 
