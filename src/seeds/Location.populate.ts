@@ -1,13 +1,13 @@
 import { Location } from "../entities/Location";
-import { Orm } from "../types/Orm";
 import { LocationData } from "../../data/Location.data";
+import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 
-const LocationPopulate = async (orm: Orm) => {
+const LocationPopulate = async (orm: MikroORM<IDatabaseDriver<Connection>>) => {
     LocationData.map((item) => {
         const location = new Location(item.location, item.description);
-        orm.orm.em.persist(location);
+        orm.em.persist(location);
     });
-    await orm.orm.em.flush();
+    await orm.em.flush();
 };
 
 export default LocationPopulate;
