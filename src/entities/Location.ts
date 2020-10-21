@@ -1,4 +1,10 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+    Collection,
+    Entity,
+    OneToMany,
+    PrimaryKey,
+    Property,
+} from "@mikro-orm/core";
 import { ObjectType, Int, Field } from "type-graphql";
 import { Billboard } from "./Billboard";
 
@@ -25,8 +31,8 @@ export class Location {
     @Property()
     description!: string;
 
-    @ManyToOne({ entity: () => Billboard })
-    billboard!: Billboard;
+    @OneToMany({ entity: () => Billboard, mappedBy: "location" })
+    billboards = new Collection<Billboard>(this);
 
     constructor(location: string, description: string) {
         this.location = location;

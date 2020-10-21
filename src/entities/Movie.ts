@@ -54,8 +54,8 @@ export class Movie {
     @ManyToOne({ entity: () => MovieClassification })
     classification!: MovieClassification;
 
-    @ManyToOne({ entity: () => Billboard })
-    billboard!: Billboard;
+    @OneToMany({ entity: () => Billboard, mappedBy: "movie" })
+    billboards = new Collection<Billboard>(this);
 
     @OneToMany({ entity: () => MovieRating, mappedBy: "movie" })
     ratings = new Collection<MovieRating>(this);

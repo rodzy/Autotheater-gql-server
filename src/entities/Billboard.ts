@@ -2,6 +2,7 @@ import {
     Collection,
     Entity,
     ManyToMany,
+    ManyToOne,
     OneToMany,
     PrimaryKey,
     Property,
@@ -42,14 +43,14 @@ export class Billboard {
     @Property()
     capacity!: number;
 
-    @OneToMany({ entity: () => Movie, mappedBy: "billboard" })
-    movies = new Collection<Movie>(this);
+    @ManyToOne({ entity: () => Movie })
+    movie!: Movie;
 
     @ManyToMany({ entity: () => Ticket, mappedBy: "billboards" })
     tickets = new Collection<Ticket>(this);
 
-    @OneToMany({ entity: () => Location, mappedBy: "billboard" })
-    locations = new Collection<Location>(this);
+    @ManyToOne({ entity: () => Location })
+    location!: Location;
 
     constructor(
         dateNow: Date,
