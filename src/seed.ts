@@ -5,10 +5,12 @@ import GenrePopulate from "./seeds/Genre.populate";
 import ProductClassificationPopulate from "./seeds/ProductClassification.populate";
 import MovieClassificationPopulate from "./seeds/MovieClassification.populate";
 import ProductTypePopulate from "./seeds/ProductType.populate";
+import RolePopulate from "./seeds/Role.populate";
 
 const seed = async () => {
     const orm = await MikroORM.init(mikroOrmConfig);
 
+    await RolePopulate(orm);
     await LocationPopulate(orm);
     await GenrePopulate(orm);
     await MovieClassificationPopulate(orm);
