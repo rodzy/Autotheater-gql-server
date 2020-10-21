@@ -3,6 +3,7 @@ import mikroOrmConfig from "./mikro-orm.config";
 import LocationPopulate from "./seeds/Location.populate";
 import GenrePopulate from "./seeds/Genre.populate";
 import ProductClassificationPopulate from "./seeds/ProductClassification.populate";
+import MovieClassificationPopulate from "./seeds/MovieClassification.populate";
 
 const seed = async () => {
     const orm = await MikroORM.init(mikroOrmConfig);
@@ -10,5 +11,6 @@ const seed = async () => {
     await LocationPopulate(orm);
     await GenrePopulate(orm);
     await ProductClassificationPopulate(orm);
+    await MovieClassificationPopulate(orm);
 };
 seed();
