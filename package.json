@@ -20,7 +20,7 @@
         "db:populate": "ts-node src/seed.ts",
         "db:down": "mikro-orm migration:down --to 0",
         "db:update": "mikro-orm schema:update --run",
-        "db:test":"ts-node src/testUtils/setup.ts"
+        "db:test": "ts-node src/testUtils/setup.ts"
     },
     "devDependencies": {
         "@types/jest": "^26.0.15",
@@ -45,7 +45,8 @@
         "graphql": "^15.3.0",
         "pg": "^8.4.1",
         "reflect-metadata": "^0.1.13",
-        "type-graphql": "^1.1.0"
+        "type-graphql": "^1.1.0",
+        "typeorm": "^0.2.28"
     },
     "mikro-orm": {
         "useTsNode": true,
