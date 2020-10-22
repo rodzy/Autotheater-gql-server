@@ -18,5 +18,7 @@ const seed = async () => {
     await ProductClassificationPopulate(orm);
     await MovieClassificationPopulate(orm);
     await GenrePopulate(orm);
+
+    await orm.close(true);
 };
 seed();

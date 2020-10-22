@@ -6,7 +6,7 @@
     "author": "rodzy <irod2899@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "test": "jest",
+        "test": "npm run db:test && jest",
         "watch": "tsc -w",
         "dev": "nodemon dist/src/index.js",
         "dev:ts": "nodemon --exec src/index.ts",
@@ -19,7 +19,8 @@
         "db:pending": "mikro-orm migration:pending",
         "db:populate": "ts-node src/seed.ts",
         "db:down": "mikro-orm migration:down --to 0",
-        "db:update": "mikro-orm schema:update --run"
+        "db:update": "mikro-orm schema:update --run",
+        "db:test":"ts-node src/testUtils/setup.ts"
     },
     "devDependencies": {
         "@types/jest": "^26.0.15",
