@@ -1,38 +1,39 @@
+import { ObjectType, Field, Int } from "type-graphql";
 import {
-    Collection,
+    Column,
+    CreateDateColumn,
     Entity,
     OneToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
-import { ObjectType, Field, Int } from 'type-graphql';
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Product } from "./Product";
 
 @ObjectType()
 @Entity()
 export class ProductType {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     name!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     description!: string;
 
-    @OneToMany({ entity: () => Product, mappedBy: "type" })
-    products = new Collection<Product>(this);
+    @OneToMany(() => Product, (product) => product.type)
+    products: Product[];
 
     constructor(name: string, description: string) {
         this.name = name;

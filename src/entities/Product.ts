@@ -1,60 +1,64 @@
-import {
-    Collection,
-    Entity,
-    ManyToMany,
-    ManyToOne,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Field, Int, Float } from "type-graphql";
 import { Reservation } from "./Reservation";
-import { OneToMany } from "@mikro-orm/core";
 import { ProductRating } from "./ProductRating";
 import { ProductClassification } from "./ProductClassification";
 import { ProductType } from "./ProductType";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Product {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     name!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     description!: string;
 
     @Field(() => Float)
-    @Property({ type: "double" })
+    @Column()
     price!: number;
 
     @Field()
-    @Property({ type: "boolean", default: true })
+    @Column({ default: true })
     status!: boolean;
 
-    @ManyToOne({ entity: () => ProductType })
+    @ManyToOne(() => ProductType, (prodcutType) => prodcutType.products)
     type!: ProductType;
 
-    @ManyToMany({ entity: () => Reservation, inversedBy: "products" })
-    reservations = new Collection<Reservation>(this);
+    @ManyToMany(() => Reservation, (reservation) => reservation.products)
+    reservations: Reservation[];
 
-    @OneToMany({ entity: () => ProductRating, mappedBy: "product" })
-    ratings = new Collection<ProductRating>(this);
+    @OneToMany(() => ProductRating, (productRating) => productRating.product)
+    ratings: ProductRating[];
 
-    @ManyToMany({ entity: () => ProductClassification, inversedBy: "products" })
-    classifications = new Collection<ProductClassification>(this);
+    @ManyToMany(
+        () => ProductClassification,
+        (productClassification) => productClassification.products
+    )
+    classifications: ProductClassification[];
 
     constructor(
         name: string,

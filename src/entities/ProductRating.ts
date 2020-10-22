@@ -1,20 +1,28 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
 import { ObjectType, Int, Field } from "type-graphql";
 import { Product } from "./Product";
+import {
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class ProductRating {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
-    @Property({ type: "date" })
+    @Field(() => String)
+    @CreateDateColumn()
     createdAt = new Date();
 
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @Field(() => String)
+    @UpdateDateColumn()
     updatedAt = new Date();
 
-    @ManyToOne({ entity: () => Product })
+    @ManyToOne(() => Product, (product) => product.ratings)
     product!: Product;
 }
