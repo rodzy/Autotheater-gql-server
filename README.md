@@ -21,33 +21,36 @@ Auto theater server the GraphQL + Node.js version of the REST API build with Lar
 5. Setup your database environment keep in mind that this server was made using PostgreSQL in mind.
 6. Create a `.env` file as the following
 
-   ```s
-   DB_CONNECTION=pgsql
-   DB_HOST=127.0.0.1
-   DB_PORT=5432
-   DB_NAME="autotheatergql"
-   DB_USERNAME= "<your-username>"
-   DB_PASSWORD= "<password>"
-   ```
+    ```s
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_NAME="autotheatergql"
+    DB_USERNAME= "<your-username>"
+    DB_PASSWORD= "<password>"
+    ```
 
 7. Run `yarn watch` to compile all the `*.ts` files into `*.js`.
 8. Run `yarn dev`, and you're ready to go server must be online on `http://localhost:4000/graphql`.
 
 ## Scripts
 
-This project uses TypeScript watch to compile the code to JavaScript for a faster load time and better optimazation for *production*
+This project uses TypeScript watch to compile the code to JavaScript for a faster load time and better optimazation for _production_
 
 The npm scripts:
 
 ```json
   "scripts": {
-    "watch":"tsc -w",
-    "dev":"nodemon dist/index.js",
-    "dev:ts":"nodemon --exec src/index.ts",
-    "start":"node dist/index.js",
-    "start:ts":"ts-node src/index.ts",
-    "db:migrate":"mikro-orm migration:create",
-    "db:populate": "ts-node src/seed.ts"
+        "test": "npm run db:test && jest",
+        "watch": "tsc -w",
+        "dev": "nodemon dist/src/index.js",
+        "dev:ts": "nodemon --exec src/index.ts",
+        "start": "node dist/src/index.js",
+        "start:ts": "ts-node src/index.ts",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "db:populate": "ts-node src/seed.ts",
+        "db:test": "ts-node src/testUtils/setup.ts"
   },
 ```
 
@@ -57,20 +60,20 @@ The npm scripts:
 
 The current data model is composed by:
 
-- Roles
-- Users
-- Genres
-- Classifications (Movies)
-- Movies
-- Likes (Movies)
-- Locations
-- Billboards
-- Product_Types
-- Classification_Products (Products)
-- Products
-- Rating (Products)
-- Tickets
-- Reservations
+-   Roles
+-   Users
+-   Genres
+-   Classifications (Movies)
+-   Movies
+-   Likes (Movies)
+-   Locations
+-   Billboards
+-   Product_Types
+-   Classification_Products (Products)
+-   Products
+-   Rating (Products)
+-   Tickets
+-   Reservations
 
 <p align="center"><img src="https://github.com/rodzy/Autotheater-server/blob/master/AutoTheater-Database-v.3.PNG"/></p>
 <em>Diagram to understand the basic flow of the aplication, <strong>some tables are not in the current data structure </strong></em>

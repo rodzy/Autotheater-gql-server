@@ -14,12 +14,7 @@
         "start:ts": "ts-node src/index.ts",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "db:migrate": "mikro-orm migration:create",
-        "db:list": "mikro-orm migration:list",
-        "db:pending": "mikro-orm migration:pending",
         "db:populate": "ts-node src/seed.ts",
-        "db:down": "mikro-orm migration:down --to 0",
-        "db:update": "mikro-orm schema:update --run",
         "db:test": "ts-node src/testUtils/setup.ts"
     },
     "devDependencies": {
