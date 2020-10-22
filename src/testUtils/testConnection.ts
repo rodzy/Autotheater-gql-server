@@ -1,15 +1,19 @@
 require("dotenv").config();
-import { MikroORM } from "@mikro-orm/core/MikroORM";
-// import { IDatabaseDriver } from "@mikro-orm/core";
 import entities from "../entities";
-import { UmzugMigration } from "@mikro-orm/migrations";
+import { Connection, createConnection } from "typeorm";
 
-export const testConnection = async (): Promise<UmzugMigration[]> => {
-    const orm = await MikroORM.init({
-        entities: [...entities],
-        dbName: process.env.DB_TEST_NAME,
+export const testConnection = async (): Promise<Connection> => {
+    const conn = await createConnection({
+        type: "postgres",
+        host: process.env.DB_HOST,
+        port: parseInt(process.env.DB_PORT as string),
+        username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
-        type: "postgresql",
+        database: process.env.DB_TEST_NAME,
+        synchronize: true,
+        logging: false,
+        entities: [...entities],
     });
-    return await orm.getMigrator().up();
+
+    return conn;
 };
