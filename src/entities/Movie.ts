@@ -1,64 +1,68 @@
-import {
-    Collection,
-    Entity,
-    ManyToMany,
-    ManyToOne,
-    OneToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { Field, Int, ObjectType } from "type-graphql";
 import { Genre } from "./Genre";
 import { MovieClassification } from "./MovieClassification";
 import { Billboard } from "./Billboard";
 import { MovieRating } from "./MovieRating";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Movie {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     name!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     synopsis!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     image_url!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     banner_url!: string;
 
     @Field()
-    @Property({ type: "boolean", default: true })
+    @Column({ default: true })
     status!: boolean;
 
-    @ManyToMany({ entity: () => Genre, inversedBy: "movies" })
-    genres = new Collection<Genre>(this);
+    @ManyToMany(() => Genre, (genre) => genre.movies)
+    genres: Genre[];
 
-    @ManyToOne({ entity: () => MovieClassification })
+    @ManyToOne(
+        () => MovieClassification,
+        (movieClassification) => movieClassification.movies
+    )
     classification!: MovieClassification;
 
-    @OneToMany({ entity: () => Billboard, mappedBy: "movie" })
-    billboards = new Collection<Billboard>(this);
+    @OneToMany(() => Billboard, (billboard) => billboard.movie)
+    billboards: Billboard[];
 
-    @OneToMany({ entity: () => MovieRating, mappedBy: "movie" })
-    ratings = new Collection<MovieRating>(this);
+    @OneToMany(() => MovieRating, (movieRating) => movieRating.movie)
+    ratings: MovieRating[];
 
     constructor(
         name: string,

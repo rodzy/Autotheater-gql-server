@@ -1,38 +1,39 @@
+import { ObjectType, Field, Int } from "type-graphql";
 import {
-    Collection,
+    Column,
+    CreateDateColumn,
     Entity,
     OneToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
-import { ObjectType, Field, Int } from "type-graphql";
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Movie } from "./Movie";
 
 @ObjectType()
 @Entity()
 export class MovieClassification {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     type!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     description!: string;
 
-    @OneToMany({ entity: () => Movie, mappedBy: "classification" })
-    movies = new Collection<Movie>(this);
+    @OneToMany(() => Movie, (movie) => movie.classification)
+    movies: Movie[];
 
     constructor(type: string, description: string) {
         this.type = type;
