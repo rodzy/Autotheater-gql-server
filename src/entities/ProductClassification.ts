@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinTable,
     ManyToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -37,6 +38,7 @@ export class ProductClassification {
     addedPrice!: number;
 
     @ManyToMany(() => Product, (product) => product.classifications)
+    @JoinTable()
     products: Product[];
 
     constructor(type: string, description: string, addePrice: number) {

@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
     Column,
     ManyToMany,
+    JoinTable,
 } from "typeorm";
 import { Movie } from "./Movie";
 
@@ -33,6 +34,7 @@ export class Genre {
     description?: string;
 
     @ManyToMany(() => Movie, (movie) => movie.genres)
+    @JoinTable()
     movies: Movie[];
 
     constructor(name: string, description: string) {

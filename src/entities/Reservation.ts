@@ -10,6 +10,7 @@ import {
     UpdateDateColumn,
     ManyToMany,
     ManyToOne,
+    JoinTable,
 } from "typeorm";
 
 @ObjectType()
@@ -29,7 +30,7 @@ export class Reservation {
 
     @Field(() => String)
     @Column()
-    date_now = new Date();
+    date_now!: Date;
 
     @Field(() => Int)
     @Column()
@@ -44,9 +45,11 @@ export class Reservation {
     status!: boolean;
 
     @ManyToMany(() => Ticket, (ticket) => ticket.reservations)
+    @JoinTable()
     tickets: Ticket[];
 
     @ManyToMany(() => Product, (product) => product.reservations)
+    @JoinTable()
     products: Product[];
 
     @ManyToOne(() => User, (user) => user.reservations)
