@@ -1,38 +1,39 @@
-import {
-    Collection,
-    Entity,
-    OneToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Int, Field } from "type-graphql";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    Column,
+    OneToMany,
+} from "typeorm";
 import { Billboard } from "./Billboard";
 
 @ObjectType()
 @Entity()
 export class Location {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     location!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     description!: string;
 
-    @OneToMany({ entity: () => Billboard, mappedBy: "location" })
-    billboards = new Collection<Billboard>(this);
+    @OneToMany(() => Billboard, (billboard) => billboard.location)
+    billboards: Billboard[];
 
     constructor(location: string, description: string) {
         this.location = location;

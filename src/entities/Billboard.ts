@@ -1,59 +1,60 @@
-import {
-    Collection,
-    Entity,
-    ManyToMany,
-    ManyToOne,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Field, Int } from "type-graphql";
 import { Movie } from "./Movie";
 import { Ticket } from "./Ticket";
 import { Location } from "./Location";
+import {
+    Column,
+    Entity,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToOne,
+    ManyToMany,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Billboard {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @Column()
     date_now = new Date();
 
     @Field(() => String)
-    @Property({ type: "date" })
-    show_date!: string;
+    @Column()
+    show_date!: Date;
 
     @Field()
-    @Property({ type: "boolean", default: true })
+    @Column({ default: true })
     status!: boolean;
 
     @Field(() => Int)
-    @Property()
+    @Column()
     capacity!: number;
 
-    @ManyToOne({ entity: () => Movie })
+    @ManyToOne(() => Movie, (movie) => movie.billboards)
     movie!: Movie;
 
-    @ManyToMany({ entity: () => Ticket, mappedBy: "billboards" })
-    tickets = new Collection<Ticket>(this);
+    @ManyToMany(() => Ticket, (ticket) => ticket.billboards)
+    tickets: Ticket[];
 
-    @ManyToOne({ entity: () => Location })
+    @ManyToOne(() => Location, (location) => location.billboards)
     location!: Location;
 
     constructor(
         dateNow: Date,
-        showDate: string,
+        showDate: Date,
         status: boolean,
         capacity: number
     ) {
