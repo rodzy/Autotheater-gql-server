@@ -1,54 +1,55 @@
-import {
-    Collection,
-    Entity,
-    ManyToMany,
-    ManyToOne,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Field, Int, Float } from "type-graphql";
 import { Ticket } from "./Ticket";
 import { Product } from "./Product";
 import { User } from "./User";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToMany,
+    ManyToOne,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Reservation {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @CreateDateColumn()
     createdAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
+    @UpdateDateColumn()
     updatedAt = new Date();
 
     @Field(() => String)
-    @Property({ type: "date" })
+    @Column()
     date_now = new Date();
 
     @Field(() => Int)
-    @Property({ type: "int" })
+    @Column()
     tax!: number;
 
     @Field(() => Float)
-    @Property({ type: "double" })
+    @Column()
     total!: number;
 
     @Field()
-    @Property({ default: true })
+    @Column({ default: true })
     status!: boolean;
 
-    @ManyToMany({ entity: () => Ticket, mappedBy: "reservations" })
-    tickets = new Collection<Ticket>(this);
+    @ManyToMany(() => Ticket, (ticket) => ticket.reservations)
+    tickets: Ticket[];
 
-    @ManyToMany({ entity: () => Product, mappedBy: "reservations" })
-    products = new Collection<Product>(this);
+    @ManyToMany(() => Product, (product) => product.reservations)
+    products: Product[];
 
-    @ManyToOne({ entity: () => User })
+    @ManyToOne(() => User, (user) => user.reservations)
     user!: User;
 
     constructor(tax: number, total: number, status: boolean) {
