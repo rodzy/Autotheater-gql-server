@@ -4,7 +4,7 @@ import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 
 const ProductClassificationPopulate = async (
     orm: MikroORM<IDatabaseDriver<Connection>>
-) => {
+): Promise<void> => {
     ProductClassificationData.map((item) => {
         const pc = new ProductClassification(
             item.type,

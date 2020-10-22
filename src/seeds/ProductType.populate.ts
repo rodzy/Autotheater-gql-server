@@ -4,7 +4,7 @@ import { ProductTypeData } from "../../data/ProductType.data";
 
 const ProductTypePopulate = async (
     orm: MikroORM<IDatabaseDriver<Connection>>
-) => {
+): Promise<void> => {
     ProductTypeData.map((item) => {
         const productType = new ProductType(item.name, item.description);
         orm.em.persist(productType);

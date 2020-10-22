@@ -2,7 +2,9 @@ import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 import { TicketData } from "../../data/Ticket.data";
 import { Ticket } from "../entities/Ticket";
 
-const TicketPopulate = async (orm: MikroORM<IDatabaseDriver<Connection>>) => {
+const TicketPopulate = async (
+    orm: MikroORM<IDatabaseDriver<Connection>>
+): Promise<void> => {
     TicketData.map((item) => {
         const ticket = new Ticket(
             item.name,
