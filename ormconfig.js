@@ -1,4 +1,5 @@
 require("dotenv").config();
+import entities from './src/entities'
 
 export default {
     "default": true,
@@ -10,5 +11,5 @@ export default {
     "database": process.env.DB_NAME,
     "synchronize": true,
     "logging": true,
-    "entities": ["src/entities/*.*"]
+    "entities": [...entities]
 }

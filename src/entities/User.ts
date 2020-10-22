@@ -1,45 +1,55 @@
-import {
-    Entity,
-    ManyToOne,
-    OneToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Int, Field } from "type-graphql";
 import { Reservation } from "./Reservation";
 import { Role } from "./Role";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 ObjectType();
 @Entity()
 export class User {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     username!: string;
 
     @Field(() => String)
-    @Property({ type: "text", nullable: true })
+    @Column({ nullable: true })
     lastName?: string;
 
     @Field(() => String)
-    @Property({ type: "text", unique: true })
+    @Column({ unique: true })
     email!: string;
 
-    @Property({ type: "text" })
+    @Column()
     password!: string;
 
     @Field()
-    @Property({ type: "boolean", default: true })
+    @Column({ default: true })
     status!: boolean;
 
-    @OneToMany({ entity: () => Reservation, mappedBy: "user" })
-    reservations!: Reservation;
+    @OneToMany(() => Reservation, (reservation) => reservation.user)
+    reservations!: Reservation[];
 
-    @ManyToOne({ entity: () => Role })
+    @ManyToOne(() => Role, (role) => role.users)
     role!: Role;
+
+    @Field(() => String)
+    @CreateDateColumn()
+    createdAt = new Date();
+
+    @Field(() => String)
+    @UpdateDateColumn()
+    updatedAt = new Date();
 
     constructor(
         username: string,

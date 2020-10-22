@@ -1,15 +1,13 @@
 import "reflect-metadata";
-import { MikroORM } from "@mikro-orm/core";
-import mikroOrmConfig from "./mikro-orm.config";
 import Express from "express";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import { __prod__ } from "./utils/constants.util";
-import { UserResolver } from './resolvers/UserResolver';
+import { UserResolver } from "./resolvers/UserResolver";
+import { createConnection } from "typeorm";
 
 const main = async () => {
-    const orm = await MikroORM.init(mikroOrmConfig);
-    await orm.getMigrator().up();
+    await createConnection();
 
     const app = Express();
 
@@ -20,7 +18,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema,
-        context: () => ({ em: orm.em }),
+        context: (req: any, res: any) => ({ req: req, res: res }),
     });
 
     apolloServer.applyMiddleware({ app });
@@ -31,5 +29,4 @@ const main = async () => {
         console.log(`⚡ Server up at: http://localhost:${port}/graphql`);
     });
 };
-
 main();
