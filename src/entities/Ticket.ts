@@ -1,50 +1,51 @@
-import {
-    Collection,
-    Entity,
-    ManyToMany,
-    PrimaryKey,
-    Property,
-} from "@mikro-orm/core";
 import { ObjectType, Int, Field, Float } from "type-graphql";
 import { Billboard } from "./Billboard";
 import { Reservation } from "./Reservation";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Ticket {
     @Field(() => Int)
-    @PrimaryKey()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Field(() => String)
-    @Property({ type: "date" })
-    createdAt = new Date();
-
-    @Field(() => String)
-    @Property({ type: "date", onUpdate: () => new Date() })
-    updatedAt = new Date();
-
-    @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     name!: string;
 
     @Field(() => String)
-    @Property({ type: "text" })
+    @Column()
     description!: string;
 
     @Field(() => Float)
-    @Property({ type: "double" })
+    @Column()
     pricing!: number;
 
     @Field()
-    @Property({ type:"boolean", default: true })
+    @Column({ default: true })
     status!: boolean;
 
-    @ManyToMany({ entity: () => Billboard, inversedBy: "tickets" })
-    billboards = new Collection<Billboard>(this);
+    @ManyToMany(() => Billboard, (billboard) => billboard.tickets)
+    billboards: Billboard[];
 
-    @ManyToMany({ entity: () => Reservation, inversedBy: "tickets" })
-    reservations = new Collection<Reservation>(this);
+    @ManyToMany(() => Reservation, (reservation) => reservation.tickets)
+    reservations: Reservation[];
+
+    @Field(() => String)
+    @CreateDateColumn()
+    createdAt = new Date();
+
+    @Field(() => String)
+    @UpdateDateColumn()
+    updatedAt = new Date();
 
     constructor(
         name: string,
