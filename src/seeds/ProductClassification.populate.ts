@@ -1,19 +1,17 @@
 import { ProductClassification } from "../entities/ProductClassification";
 import { ProductClassificationData } from "../../data/ProductClassification.data";
-import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 
-const ProductClassificationPopulate = async (
-    orm: MikroORM<IDatabaseDriver<Connection>>
-): Promise<void> => {
-    ProductClassificationData.map((item) => {
-        const pc = new ProductClassification(
-            item.type,
-            item.description,
-            item.addePrice
+const ProductClassificationPopulate = async (): Promise<void> => {
+    ProductClassificationData.map(async (item) => {
+        const pc = ProductClassification.create(
+            new ProductClassification(
+                item.type,
+                item.description,
+                item.addePrice
+            )
         );
-        orm.em.persist(pc);
+        await pc.save();
     });
-    await orm.em.flush();
 };
 
 export default ProductClassificationPopulate;

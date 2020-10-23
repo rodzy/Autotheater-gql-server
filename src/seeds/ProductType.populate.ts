@@ -1,15 +1,13 @@
-import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 import { ProductType } from "../entities/ProductType";
 import { ProductTypeData } from "../../data/ProductType.data";
 
-const ProductTypePopulate = async (
-    orm: MikroORM<IDatabaseDriver<Connection>>
-): Promise<void> => {
-    ProductTypeData.map((item) => {
-        const productType = new ProductType(item.name, item.description);
-        orm.em.persist(productType);
+const ProductTypePopulate = async (): Promise<void> => {
+    ProductTypeData.map(async (item) => {
+        const productType = ProductType.create(
+            new ProductType(item.name, item.description)
+        );
+        await productType.save();
     });
-    await orm.em.flush();
 };
 
 export default ProductTypePopulate;

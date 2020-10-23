@@ -1,15 +1,11 @@
 import { Genre } from "../entities/Genre";
 import { GenreData } from "../../data/Genre.data";
-import { MikroORM, IDatabaseDriver, Connection } from "@mikro-orm/core";
 
-const GenrePopulate = async (
-    orm: MikroORM<IDatabaseDriver<Connection>>
-): Promise<void> => {
-    GenreData.map((item) => {
-        const genre = new Genre(item.name, item.description);
-        orm.em.persist(genre);
+const GenrePopulate = async (): Promise<void> => {
+    GenreData.map(async (item) => {
+        const genre = Genre.create(new Genre(item.name, item.description));
+        await genre.save();
     });
-    orm.em.flush();
 };
 
 export default GenrePopulate;
