@@ -2,7 +2,6 @@ import "reflect-metadata";
 import Express from "express";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
-import { __prod__ } from "./utils/constants.util";
 import { UserResolver } from "./resolvers/UserResolver";
 import { createConnection } from "typeorm";
 
@@ -18,15 +17,18 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema,
-        context: (req: any, res: any) => ({ req: req, res: res }),
+        context: ({ req, res }) => ({ req, res }),
     });
 
     apolloServer.applyMiddleware({ app });
 
-    const port = __prod__ ? process.env.PORT : 4000;
-
-    app.listen(port, () => {
-        console.log(`⚡ Server up at: http://localhost:${port}/graphql`);
+    app.listen(parseInt(process.env.PORT), () => {
+        console.log(
+            `⚡ Server up at: http://localhost:${process.env.PORT}/graphql`
+        );
     });
 };
-main();
+
+main().catch((err) => {
+    console.log(err);
+});
