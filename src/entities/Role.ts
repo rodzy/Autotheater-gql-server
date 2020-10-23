@@ -1,6 +1,7 @@
 import { ObjectType, Int, Field } from "type-graphql";
 import { User } from "./User";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -11,7 +12,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Role {
+export class Role extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -36,6 +37,7 @@ export class Role {
     updatedAt = new Date();
 
     constructor(name: string, description: string) {
+        super();
         this.name = name;
         this.description = description;
     }

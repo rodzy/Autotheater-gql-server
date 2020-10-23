@@ -6,12 +6,13 @@ import {
     UpdateDateColumn,
     Column,
     OneToMany,
+    BaseEntity,
 } from "typeorm";
 import { Billboard } from "./Billboard";
 
 @ObjectType()
 @Entity()
-export class Location {
+export class Location extends BaseEntity{
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -36,6 +37,7 @@ export class Location {
     billboards: Billboard[];
 
     constructor(location: string, description: string) {
+        super();
         this.location = location;
         this.description = description;
     }

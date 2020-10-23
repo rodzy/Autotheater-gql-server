@@ -7,12 +7,13 @@ import {
     Column,
     ManyToMany,
     JoinTable,
+    BaseEntity,
 } from "typeorm";
 import { Movie } from "./Movie";
 
 @ObjectType()
 @Entity()
-export class Genre {
+export class Genre extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -38,6 +39,7 @@ export class Genre {
     movies: Movie[];
 
     constructor(name: string, description: string) {
+        super();
         this.name = name;
         this.description = description;
     }

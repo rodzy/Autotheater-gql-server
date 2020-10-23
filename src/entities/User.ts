@@ -2,6 +2,7 @@ import { ObjectType, Int, Field } from "type-graphql";
 import { Reservation } from "./Reservation";
 import { Role } from "./Role";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -13,7 +14,7 @@ import {
 
 ObjectType();
 @Entity()
-export class User {
+export class User extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -58,6 +59,7 @@ export class User {
         password: string,
         status: boolean
     ) {
+        super();
         this.username = username;
         this.lastName = lastName;
         this.email = email;

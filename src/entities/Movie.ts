@@ -4,6 +4,7 @@ import { MovieClassification } from "./MovieClassification";
 import { Billboard } from "./Billboard";
 import { MovieRating } from "./MovieRating";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -16,7 +17,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Movie {
+export class Movie extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -71,6 +72,7 @@ export class Movie {
         bannerUrl: string,
         status: boolean
     ) {
+        super();
         this.name = name;
         this.synopsis = synopsis;
         this.image_url = imageUrl;

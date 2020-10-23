@@ -11,11 +11,12 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
+    BaseEntity,
 } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class Billboard {
+export class Billboard extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -60,6 +61,7 @@ export class Billboard {
         status: boolean,
         capacity: number
     ) {
+        super();
         this.date_now = dateNow;
         this.show_date = showDate;
         this.status = status;

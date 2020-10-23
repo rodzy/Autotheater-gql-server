@@ -2,6 +2,7 @@ import { ObjectType, Int, Field, Float } from "type-graphql";
 import { Billboard } from "./Billboard";
 import { Reservation } from "./Reservation";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -12,7 +13,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Ticket {
+export class Ticket extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -53,6 +54,7 @@ export class Ticket {
         pricing: number,
         status: boolean
     ) {
+        super();
         this.name = name;
         this.description = description;
         this.pricing = pricing;

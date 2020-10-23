@@ -4,6 +4,7 @@ import { ProductRating } from "./ProductRating";
 import { ProductClassification } from "./ProductClassification";
 import { ProductType } from "./ProductType";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -16,7 +17,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Product {
+export class Product extends BaseEntity{
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -66,6 +67,7 @@ export class Product {
         price: number,
         status: boolean
     ) {
+        super();
         this.name = name;
         this.description = description;
         this.price = price;

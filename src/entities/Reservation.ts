@@ -11,11 +11,12 @@ import {
     ManyToMany,
     ManyToOne,
     JoinTable,
+    BaseEntity,
 } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class Reservation {
+export class Reservation extends BaseEntity{
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -56,6 +57,7 @@ export class Reservation {
     user!: User;
 
     constructor(tax: number, total: number, status: boolean) {
+        super();
         this.tax = tax;
         this.total = total;
         this.status = status;

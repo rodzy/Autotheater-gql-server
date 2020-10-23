@@ -1,6 +1,7 @@
 import { ObjectType, Int, Field } from "type-graphql";
 import { Product } from "./Product";
 import {
+    BaseEntity,
     CreateDateColumn,
     Entity,
     ManyToOne,
@@ -10,7 +11,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class ProductRating {
+export class ProductRating extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -25,4 +26,8 @@ export class ProductRating {
 
     @ManyToOne(() => Product, (product) => product.ratings)
     product!: Product;
+
+    constructor() {
+        super();
+    }
 }

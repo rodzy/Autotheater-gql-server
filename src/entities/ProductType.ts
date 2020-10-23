@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from "type-graphql";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -11,7 +12,7 @@ import { Product } from "./Product";
 
 @ObjectType()
 @Entity()
-export class ProductType {
+export class ProductType extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -36,6 +37,7 @@ export class ProductType {
     products: Product[];
 
     constructor(name: string, description: string) {
+        super();
         this.name = name;
         this.description = description;
     }
