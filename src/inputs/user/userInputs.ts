@@ -4,20 +4,20 @@ import { Role } from "../../entities/Role";
 @InputType()
 export class UserInputs {
     @Field()
-    username!: string;
+    username: string;
 
     @Field()
     lastName?: string;
 
-    @Field(() => String)
-    email!: string;
+    @Field()
+    email: string;
 
     @Field()
-    password!: string;
+    password: string;
 
     @Field()
-    status!: boolean;
+    status: boolean;
 
     @Field()
-    role!: Role;
+    role: Role;
 }
