@@ -1,7 +1,7 @@
 import { TicketData } from "../../data/Ticket.data";
 import { Ticket } from "../entities/Ticket";
 
-const TicketPopulate = async (): Promise<void> => {
+const ticketPopulate = async (): Promise<void> => {
     TicketData.map(async (item) => {
         const ticket = Ticket.create(
             new Ticket(item.name, item.description, item.pricing, item.status)
@@ -10,4 +10,4 @@ const TicketPopulate = async (): Promise<void> => {
     });
 };
 
-export default TicketPopulate;
+export default ticketPopulate;

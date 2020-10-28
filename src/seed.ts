@@ -1,22 +1,22 @@
-import LocationPopulate from "./factories/Location.populate";
-import GenrePopulate from "./factories/Genre.populate";
-import ProductClassificationPopulate from "./factories/ProductClassification.populate";
-import MovieClassificationPopulate from "./factories/MovieClassification.populate";
-import ProductTypePopulate from "./factories/ProductType.populate";
-import RolePopulate from "./factories/Role.populate";
-import TicketPopulate from "./factories/Ticket.populate";
+import locationPopulate from "./factories/Location.populate";
+import genrePopulate from "./factories/Genre.populate";
+import productClassificationPopulate from "./factories/ProductClassification.populate";
+import movieClassificationPopulate from "./factories/MovieClassification.populate";
+import productTypePopulate from "./factories/ProductType.populate";
+import rolePopulate from "./factories/Role.populate";
+import ticketPopulate from "./factories/Ticket.populate";
 import { createConnection } from 'typeorm';
 
 const seed = async () => {
     await createConnection();
 
-    await RolePopulate();
-    await LocationPopulate();
-    await ProductTypePopulate();
-    await TicketPopulate();
-    await ProductClassificationPopulate();
-    await MovieClassificationPopulate();
-    await GenrePopulate();
+    await rolePopulate();
+    await locationPopulate();
+    await productTypePopulate();
+    await ticketPopulate();
+    await productClassificationPopulate();
+    await movieClassificationPopulate();
+    await genrePopulate();
 
 };
 seed();

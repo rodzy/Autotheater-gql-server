@@ -1,7 +1,7 @@
 import { Location } from "../entities/Location";
 import { LocationData } from "../../data/Location.data";
 
-const LocationPopulate = async (): Promise<void> => {
+const locationPopulate = async (): Promise<void> => {
     LocationData.map(async (item) => {
         const location = Location.create(
             new Location(item.location, item.description)
@@ -10,4 +10,4 @@ const LocationPopulate = async (): Promise<void> => {
     });
 };
 
-export default LocationPopulate;
+export default locationPopulate;
