@@ -22,7 +22,7 @@ const main = async () => {
 
     apolloServer.applyMiddleware({ app });
 
-    app.listen(parseInt(process.env.PORT), () => {
+    app.listen(parseInt(process.env.PORT as string), () => {
         console.log(
             `⚡ Server up at: http://localhost:${process.env.PORT}/graphql`
         );

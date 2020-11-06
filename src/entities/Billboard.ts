@@ -1,4 +1,3 @@
-import { ObjectType, Field, Int } from "type-graphql";
 import { Movie } from "./Movie";
 import { Ticket } from "./Ticket";
 import { Location } from "./Location";
@@ -13,6 +12,7 @@ import {
     JoinTable,
     BaseEntity,
 } from "typeorm";
+import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
 @Entity()
